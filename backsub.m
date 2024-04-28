@@ -14,11 +14,11 @@ X = zeros(n, m);
 switch type
     case 'lower'
         for k=1:n
-            X(k, :) = B(k, :) - A(k, 1:k-1) * X(1:k-1, :);
+            X(k, :) = (B(k, :) - A(k, 1:k-1) * X(1:k-1, :)) / A(k, k);
         end
     case 'upper'
         for k=n:-1:1
-            X(k, :) = B(k, :) - A(k, k+1:n) * X(k+1:n);
+            X(k, :) = (B(k, :) - A(k, k+1:n) * X(k+1:n)) / A(k, k);
         end
 end
 
