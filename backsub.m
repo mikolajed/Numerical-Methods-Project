@@ -11,10 +11,6 @@ function [X] = backsub(A, B, type)
 [n, m] = size(B);
 X = zeros(n, m);
 
-for k=1:m
-    X(:, k) = back1sub(A, B(:, k), type);
-end
-
 switch type
     case 'lower'
         for k=1:n
