@@ -27,19 +27,3 @@ switch type
 end
 
 end
-
-function [x] = back1sub(A, b, type)
-n = size(A, 1);
-x = zeros(n, 1);
-
-switch type
-    case 'lower'
-        for k=1:n
-            x(k) = b(k) - sum(A(k, 1:k-1) .* x(1:k-1)');
-        end
-    case 'upper'
-        for k=n:-1:1
-            x(k) = b(k) - sum(A(k, k+1:n) .* x(k+1:n)');
-        end
-end
-end
