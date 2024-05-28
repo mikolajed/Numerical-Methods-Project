@@ -19,7 +19,6 @@
 %   [X, d] = SOLVE_MATLAB(A, B)  returns:   X, the solution matrix of systems of linear equations AX = B
 %                                           d, the determinant of A
 function [X, d] = solve_matlab(A, B)
-X = B \ A;
+X = A \ B;
 d = det(A);
-
 end

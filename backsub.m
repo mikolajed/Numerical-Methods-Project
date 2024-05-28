@@ -34,7 +34,7 @@ switch type
             if A(k, k) == 0
                 error("backsub:zeroDiagonal", "Matrix A has 0 on the main diagonal.");
             end
-            X(k, :) = (B(k, :) - A(k, k+1:n) * X(k+1:n)) / A(k, k);
+            X(k, :) = (B(k, :) - A(k, k+1:n) * X(k+1:n, :)) / A(k, k);
         end
 end
 
