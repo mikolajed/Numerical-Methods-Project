@@ -22,7 +22,7 @@
 %   and on interval [a, b].
 function [A, X, B] = generate_case(n, m, type, make_diag_dom)
     if nargin < 4
-        make_diag_dom = true;
+        make_diag_dom = false;
     end
 
     % Define the matrix generation function based on the type, 
@@ -33,7 +33,7 @@ function [A, X, B] = generate_case(n, m, type, make_diag_dom)
         case 'uniform'
             f = @(a, b) -1e6 + 1e6 * rand(a, b);
         case 'natural'
-            f = @(a, b) randi([0, 1], a, b) + 1;
+            f = @(a, b) randi([0, 10], a, b) + 1;
         otherwise
             error('Unsupported type. Choose from ''normal'', ''uniform'', or ''natural''.');
     end
@@ -51,11 +51,10 @@ function [A, X, B] = generate_case(n, m, type, make_diag_dom)
     % Make A diagonally dominant if required
     if make_diag_dom
         for i = 1:n
-            % Sum of absolute values of non-diagonal elements in the row
             row_sum = sum(abs(A(i, :))) - abs(A(i, i));
             % Ensure diagonal element is greater than row_sum
             if A(i, i) <= row_sum
-                A(i, i) = row_sum + 1;
+                A(i, i) = row_sum + 0.1;
             end
         end
     end

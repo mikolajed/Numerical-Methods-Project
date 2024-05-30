@@ -29,9 +29,9 @@ A_21 = A(p+1:2*p, 1:p);
 A_22 = A(p+1:2*p, p+1:2*p);
 
 % Compute first p x's by backward substitution
-X_1 = backsub(A_11, B(1:p, :), 'lower');
+X_1 = substitute(A_11, B(1:p, :), 'lower');
 % Use the first p x's to compute the other half of x's with backward substitution
-X_2 = backsub(A_22, B(p+1:2*p, :) - A_21 * X_1, 'upper');
+X_2 = substitute(A_22, B(p+1:2*p, :) - A_21 * X_1, 'upper');
 % The final answer is the concatenation of the two
 X = [X_1 ; X_2];
 

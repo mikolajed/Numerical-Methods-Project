@@ -1,6 +1,6 @@
 % Author: Mikołaj Jędrzejewski
 %
-%BACKSUB Performs backward substitution for AX = B, where A, B and X are matrixes and A is triangular.
+%SUBSTITUTE Performs backward or forward substitution for AX = B, where A, B and X are matrixes and A is triangular.
 %
 %   Input:
 %   - A, square triangular matrix of size n by n
@@ -12,10 +12,10 @@
 %   Output:
 %   - X, matrix of size n by m
 %
-%   X = BACKSUB(A, B, type) returns:    the solution matrix X of m n-dimensional vectors to m
-%                                       systems of linear equations
+%   X = SUBSTITUTE(A, B, type) returns:     the solution matrix X of m n-dimensional vectors to m
+%                                           systems of linear equations
 %   
-function [X] = backsub(A, B, type)
+function [X] = substitute(A, B, type)
 [n, m] = size(B);
 
 % Allocate space for the solution matrix

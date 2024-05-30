@@ -20,9 +20,9 @@ function plot_time(a, b)
 
     for i = 1:t
         n = a + 2 * (i - 1);
-        m = 4 * n;
+        m = 2 * n;
 
-        [A, X, B] = generate_case(n, m, 'normal', false);     
+        [A, X, B] = generate_case(n, m, 'normal', true);     
 
         % Measure time for custom solve method
         tic;

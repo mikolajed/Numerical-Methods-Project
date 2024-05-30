@@ -8,7 +8,8 @@
 %   - B, matrix of size n by m
 %
 %   Output:
-%   - errors, vector of errors
+%   - errors, vector of errors: for the custom and MATLAB solutions,
+%   difference between them and error for determinant
 %   - solutions, structure containing the solutions and determinants
 
 function [errors, solutions] = test_program(A, X, B)

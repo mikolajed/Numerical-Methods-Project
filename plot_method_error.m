@@ -21,12 +21,12 @@ function plot_method_error(a, b)
         n = a + 2 * (i - 1);
         m = 2 * n;
 
-        [A, X, B] = generate_case(n, m, 'normal', false);    
+        [A, X, B] = generate_case(n, m, 'normal', true);    
 
         Z_1 = solve(A, B);
         Z_2 = solve_matlab(A, B);
         
-        conds(i) = cond(X);
+        conds(i) = norm(A) * norm(inv(A));      % or just cond(A);
         [errors(i, 1), errors(i, 2), errors(i, 3)] = test_method(A, Z_1, B, X);
         [errors_m(i, 1), errors_m(i, 2), errors_m(i, 3)] = test_method(A, Z_2, B, X);
     end

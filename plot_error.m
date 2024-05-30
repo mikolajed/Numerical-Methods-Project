@@ -16,7 +16,7 @@
 %   - show_method_errors, true if method errors should be plotted
 function plot_error(a, b, show_method_errors)
     if nargin < 3
-        show_method_errors = false;
+        show_method_errors = true;
     end
 
     t = floor((b - a) / 2) + 1; 
@@ -26,9 +26,9 @@ function plot_error(a, b, show_method_errors)
     method_err_2 = zeros(t, 3); % MATLAB method errors
     for i = 1:t
         n = a + 2 * (i - 1);
-        m = n / 2;
+        m = 1;
 
-        [A, X, B] = generate_case(n, m, 'normal', false);  
+        [A, X, B] = generate_case(n, m, 'normal', true);  
 
         [e, s] = test_program(A, X, B);
         errors(i, 1) = e(1);
@@ -36,7 +36,7 @@ function plot_error(a, b, show_method_errors)
         errors(i, 3) = e(3);
         errors(i, 4) = e(4);
             
-        conds(i) = cond(X);
+        conds(i) = norm(A) * norm(inv(A));      % or just cond(A);
         [method_err_1(i, 1), method_err_1(i, 2), method_err_1(i, 3)] = test_method(A, s.X_1, B, X);
         [method_err_2(i, 1), method_err_2(i, 2), method_err_2(i, 3)] = test_method(A, s.X_2, B, X);
     end
@@ -51,7 +51,7 @@ function plot_error(a, b, show_method_errors)
     semilogy(n_values, errors(:, 2), 'b', 'DisplayName', 'MATLAB solution error');
     hold off;
 
-    title('Solution Errors');
+    title('Errors for solving AX = B');
     xlabel('number of matrix rows n');
     ylabel('error value');
     legend show; 
@@ -93,7 +93,7 @@ function plot_error(a, b, show_method_errors)
         hold off;
         legend('Location', 'northwest');
         title('Relative Error');
-        xlabel('Number of matrix rows n');
+        xlabel('number of matrix rows n');
         ylabel('Error value');
         grid on;
     
@@ -105,7 +105,7 @@ function plot_error(a, b, show_method_errors)
         hold off;
         legend('Location', 'northwest');
         title('Forward Stability Error');
-        xlabel('Number of matrix rows n');
+        xlabel('number of matrix rows n');
         ylabel('Error value');
         grid on;
     
@@ -117,7 +117,7 @@ function plot_error(a, b, show_method_errors)
         hold off;
         legend('Location', 'northwest');
         title('Backward Stability Error');
-        xlabel('Number of matrix rows n');
+        xlabel('number of matrix rows n');
         ylabel('Error value');
         grid on;
     end
